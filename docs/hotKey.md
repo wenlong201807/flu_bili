@@ -14,3 +14,4 @@
   - Ctrl+delete 删除一行代码
   - 搜索所有使用到该类/方法等的地方（Command + Shift + F）
   - 搜索某个类在哪里定义(快速双击Shift键):
+  - 光标切换 Fn + i

@@ -8,9 +8,8 @@ import 'package:flu_bili/http/request/test_request.dart';
 
 import 'package:flu_bili/model/result.dart';
 
-
-// import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flu_bili/db/hi_cache.dart';
+/// 1 引入文件包
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Counter extends StatefulWidget {
   const Counter({super.key});
@@ -21,36 +20,32 @@ class Counter extends StatefulWidget {
 
 class _CounterState extends State<Counter> {
   int _counter = 0;
-  // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  // late Future<int> _counterA;
+  /// 3 设置变量存储 本地存储索引
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<int> _counterA;
 
   @override
   void initState() {
     super.initState();
-    // _counterA = _prefs.then((SharedPreferences prefs) {
-    //   return prefs.getInt('counter') ?? 0;
-    // });
-    HiCache.preInit();
+    /// 2 初始化本地存储索引地址
+    _counterA = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('counter') ?? 0;
+    });
   }
 
   void _increment() async {
-    // final SharedPreferences prefs = await _prefs;
-    // final int counter = (prefs.getInt('counter') ?? 0) + 1;
-    // print('本地存储数据-获取 ${counter}');
-    //
-    // setState(() {
-    //   _counterA = prefs.setInt('counter', counter).then((bool success) {
-    //     return counter;
-    //   });
-    //   print('本地存储数据-更新后 ${_counterA}');
-    // });
+    /// 4 执行获取本地储存
+    final SharedPreferences prefs = await _prefs;
+    final int counter = (prefs.getInt('counter') ?? 0) + 1;
+    print('本地存储数据-获取 ${counter}');
 
-
-    HiCache.getInstance().setString('local-wen', '12345本地存储内容');
-    var val = HiCache.getInstance().get('local-wen');
-    print('获取本地存储: $val');
-
-
+    setState(() {
+      /// 5 执行设置本地储存
+      _counterA = prefs.setInt('counter', counter).then((bool success) {
+        return counter;
+      });
+      print('本地存储数据-更新后 ${_counterA}');
+    });
 
     // TestRequest request = TestRequest();
     // request.add('aa', 'ddd').add('bb', 'bbbb').add('requestPrams', '必穿的参数');
