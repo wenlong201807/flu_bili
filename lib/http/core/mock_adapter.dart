@@ -11,7 +11,7 @@ class MockAdapter extends HiNetAdapter {
         data: {"code": 0, "message": 'success'},
         // statusCode: 403, // 未登录 需要登录Instance of 'NeedAuth' 不同状态码对应不同的异常捕获
         // statusCode: 200, // 正常
-        statusCode: 500, // 正常
+        statusCode: 403, // 不正常
       );
     });
   }

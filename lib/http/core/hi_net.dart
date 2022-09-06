@@ -35,11 +35,11 @@ class HiNet {
     } catch (e) {
       //其它异常
       error = e;
-      printLog(e);
+      printLog('其他异常: $e');
     }
 
     if (response == null) {
-      printLog(error);
+      printLog('null 的结果: $error');
     }
     var result = response.data;
     printLog(result);
@@ -75,7 +75,7 @@ class HiNet {
   // }
 
   Future<dynamic> send<T>(BaseRequest request) async {
-    printLog('url: ${request.url()}');
+    printLog('完整的url: ${request.url()}');
     // printLog('httpMethod: ${request.httpMethod()}');
     // request.addHeader('token', '123');
     // printLog('header: ${request.header}');
@@ -84,11 +84,13 @@ class HiNet {
     //   "data": {"code":0, "message": "ok"}
     // });
     /// 使用mock发送请求
-    HiNetAdapter adapter = MockAdapter();
+    // HiNetAdapter adapter = MockAdapter();
+    /// 真是接口处理发送请求
+    HiNetAdapter adapter = DioAdapter();
     return adapter.send(request);
   }
 
   void printLog(log) {
-    print('hi_net: + ${log.toString()}');
+    print('${log.toString()}');
   }
 }

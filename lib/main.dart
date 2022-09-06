@@ -15,10 +15,10 @@ class _CounterState extends State<Counter> {
 
   void _increment() async {
     TestRequest request = TestRequest();
-    request.add('aa', 'ddd').add('bb', 'bbbb');
+    request.add('aa', 'ddd').add('bb', 'bbbb').add('requestPrams', '必穿的参数');
     try {
       var result = await HiNet.getInstance().fire(request);
-      print(result);
+      print('实际结果:r, $result');
     } on NeedAuth catch (e) {
       print(e);
     }
