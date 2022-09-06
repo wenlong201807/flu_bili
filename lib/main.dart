@@ -1,3 +1,4 @@
+import 'package:flu_bili/http/core/hi_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flu_bili/http/core/hi_net.dart';
 import 'package:flu_bili/http/request/test_request.dart';
@@ -15,8 +16,18 @@ class _CounterState extends State<Counter> {
   void _increment() async {
     TestRequest request = TestRequest();
     request.add('aa', 'ddd').add('bb', 'bbbb');
-    var result = await HiNet.getInstance().fire(request);
-    print(result);
+    try {
+      var result = await HiNet.getInstance().fire(request);
+      print(result);
+    } on NeedAuth catch (e) {
+      print(e);
+    }
+    // on HiNetLogin catch (e) {
+    //   print(e);
+    // }
+    on HiNetError catch (e) {
+      print(e);
+    }
     setState(() {
       _counter++;
     });

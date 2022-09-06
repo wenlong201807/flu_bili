@@ -1,5 +1,3 @@
-
-
 enum HttpMethod { GET, POST, DELETE }
 
 ///基础请求
@@ -51,7 +49,9 @@ abstract class BaseRequest {
   ///添加参数
   BaseRequest add(String k, Object v) {
     params[k] = v.toString();
-    return this; /// 链式调用
+    return this;
+
+    /// 链式调用
   }
 
   /// 鉴权
