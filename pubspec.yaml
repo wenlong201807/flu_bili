@@ -26,6 +26,8 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
+# 依赖包来源 https://pub.dev/packages?q=dio
 dependencies:
   flutter:
     sdk: flutter
