@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flu_bili/http/core/hi_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flu_bili/http/core/hi_net.dart';
@@ -31,6 +33,19 @@ class _CounterState extends State<Counter> {
     setState(() {
       _counter++;
     });
+    test();
+  }
+
+  void test() {
+    const jsonString = "{\"name\": \"flutter\", \"url\": \"https://666.com\"}";
+    // json 转 map
+    Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+    print('name: ${jsonMap['name']}');
+    print('url: ${jsonMap['url']}');
+
+    /// map 转json
+    String json = jsonEncode(jsonMap);
+    print('json: $json');
   }
 
   @override
