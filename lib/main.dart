@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flu_bili/http/core/hi_net.dart';
 import 'package:flu_bili/http/request/test_request.dart';
 
+import 'package:flu_bili/model/result.dart';
+
 class Counter extends StatefulWidget {
   const Counter({super.key});
 
@@ -75,6 +77,11 @@ class _CounterState extends State<Counter> {
     print('name: ${owner.name}');
     print('face: ${owner.face}');
     print('fans: ${owner.fans}');
+
+    /// 半自动实现json格式化转换功能
+    /// 需要定义字段，易维护， 适合中大型项目中使用
+    Result r = Result.fromJson(ownerMap);
+    print('r: $r ${r.name}');
   }
 }
 
