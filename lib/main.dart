@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flu_bili/http/core/hi_error.dart';
+import 'package:flu_bili/model/owner.dart';
 import 'package:flutter/material.dart';
 import 'package:flu_bili/http/core/hi_net.dart';
 import 'package:flu_bili/http/request/test_request.dart';
@@ -28,12 +29,13 @@ class _CounterState extends State<Counter> {
     //   print(e);
     // }
     on HiNetError catch (e) {
-      print(e);
+      print('HiNetError: $e');
     }
     setState(() {
       _counter++;
     });
-    test();
+    // test();
+    test1();
   }
 
   void test() {
@@ -61,6 +63,18 @@ class _CounterState extends State<Counter> {
         Text('Count: $_counter'),
       ],
     );
+  }
+
+  void test1() {
+    var ownerMap = {
+      "name": "woshi shi",
+      "face": "haha",
+      "fans": 66,
+    };
+    Owner owner = Owner.fromJson(ownerMap);
+    print('name: ${owner.name}');
+    print('face: ${owner.face}');
+    print('fans: ${owner.fans}');
   }
 }
 
