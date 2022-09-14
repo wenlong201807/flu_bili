@@ -1,3 +1,5 @@
+import 'package:flu_bili/http/dao/login_dao.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 
 ///基础请求
@@ -18,7 +20,7 @@ abstract class BaseRequest {
   String url() {
     Uri uri;
     var pathStr = path();
-    //拼接path参数
+    /// 拼接path参数
     if (pathParams != null) {
       if (path().endsWith("/")) {
         pathStr = "${path()}$pathParams";
@@ -26,15 +28,15 @@ abstract class BaseRequest {
         pathStr = "${path()}/$pathParams";
       }
     }
-    //http和https切换
+    /// http和https切换
     if (useHttps) {
       uri = Uri.https(authority(), pathStr, params);
     } else {
       uri = Uri.http(authority(), pathStr, params);
     }
     if (needLogin()) {
-      //给需要登录的接口携带登录令牌
-      // addHeader(LoginDao.BOARDING_PASS, LoginDao.getBoardingPass());
+      /// 给需要登录的接口携带登录令牌
+      addHeader(LoginDao.BOARDING_PASS, LoginDao.getBoardingPass());
     }
     // print('url:${uri.toString()}');
     return uri.toString();
@@ -49,16 +51,16 @@ abstract class BaseRequest {
   ///添加参数
   BaseRequest add(String k, Object v) {
     params[k] = v.toString();
-    return this;
-
     /// 链式调用
+    return this;
   }
 
-  /// 鉴权
+  /// 鉴权 参考文档 https://doc.devio.org/api-help/docs/fa-api-help.html
   Map<String, dynamic> header = {
     'course-flag': 'fa',
     //访问令牌，在课程公告获取
     "auth-token": "MjAyMC0wNi0yMyAwMzoyNTowMQ==fa",
+    'boarding-pass':'登录成功返回的boarding-pass',
   };
 
   ///添加header
