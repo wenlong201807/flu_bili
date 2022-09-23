@@ -6,3 +6,6 @@
 - 注册模块设计与实现
 - 登录模块设计与实现
 - 登录与注册页面的相关跳转
+
+## 错误解决
+- [error running pod install 解决方案 58](https://stackoverflow.com/questions/54135078/how-to-solve-error-running-pod-install-in-flutter-on-mac)

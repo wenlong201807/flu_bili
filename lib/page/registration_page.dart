@@ -10,7 +10,7 @@ import 'package:flu_bili/widget/login_input.dart';
 
 ///注册页面
 class RegistrationPage extends StatefulWidget {
-  final VoidCallback onJumpToLogin;
+  final VoidCallback onJumpToLogin; /// 登录成功后的回调函数
 
   const RegistrationPage({required Key key, required this.onJumpToLogin}) : super(key: key);
 
@@ -20,7 +20,7 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   bool protect = false;
-  bool loginEnable = false;
+  bool loginEnable = false; /// 注册按钮是否可点击状态
   String userName = '';
   String password = '';
   String rePassword = '';
@@ -37,7 +37,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           /// 自适应键盘弹起，防止遮挡
           children: [
             LoginEffect(
-              protect: protect, key: null,
+              protect: protect, key: UniqueKey(),
             ),
             LoginInput(
               "用户名",
@@ -56,7 +56,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 checkInput();
               },
               focusChanged: (focus) {
-                this.setState(() {
+                setState(() {
                   protect = focus;
                 });
               },
@@ -67,11 +67,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
               lineStretch: true,
               obscureText: true,
               onChanged: (text) {
-                rePassword = text;
+                rePassword = text; /// onChanged 中不需要setState 去更新数据?
                 checkInput();
               },
               focusChanged: (focus) {
-                this.setState(() {
+                setState(() {
                   protect = focus;
                 });
               },
@@ -79,7 +79,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             LoginInput(
               "慕课网ID",
               "请输入你的慕课网用户ID",
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.number, /// 展示键盘的类型
               onChanged: (text) {
                 imoocId = text;
                 checkInput();
@@ -96,9 +96,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               },
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
               child: LoginButton('注册',
-                  enable: loginEnable, onPressed: checkParams),
+                  enable: loginEnable, onPressed: checkParams, key: UniqueKey()),
             )
           ],
         ),
@@ -131,7 +131,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         print('注册成功');
         // showToast('注册成功');
         if (widget.onJumpToLogin != null) {
-          widget.onJumpToLogin!();
+          widget.onJumpToLogin();
         }
       } else {
         print(result['msg']);

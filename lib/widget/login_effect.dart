@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 ///登录动效，自定义widget
 class LoginEffect extends StatefulWidget {
-  final bool protect;
+  final bool protect; /// 控制睁眼还是闭眼的状态
 
-  const LoginEffect({ Key? key, required this.protect}) : super(key: key);
+  const LoginEffect({ required Key key, required this.protect}) : super(key: key);
 
   @override
   _LoginEffectState createState() => _LoginEffectState();
@@ -21,10 +21,10 @@ class _LoginEffectState extends State<LoginEffect> {
       ),
           // border: Border(bottom: BorderSide(color: Colors.grey[300]))),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, /// 布局方式
         children: [
           _image(true),
-          Image(height: 90, width: 90, image: AssetImage('images/logo.png')),
+          const Image(height: 90, width: 90, image: AssetImage('images/logo.png')),
           _image(false),
         ],
       ),
@@ -38,6 +38,6 @@ class _LoginEffectState extends State<LoginEffect> {
     var headRight = widget.protect
         ? 'images/head_right_protect.png'
         : 'images/head_right.png';
-    return Image(height: 90, image: AssetImage(left ? headLeft : headRight));
+    return Image(height: 90, image: AssetImage(left ? headLeft : headRight)); /// 加载本地图片的组件
   }
 }

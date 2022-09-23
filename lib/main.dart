@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     HiCache.preInit();
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flu_bili2',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -35,10 +35,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: white, /// 键盘底部的颜色 此处有坑
         /// 坑点: 默认不能是白色，但是需求希望是白色。解决方法如此
       ),
-      home: RegistrationPage(key: UniqueKey(), onJumpToLogin: () {
-        print('点击返回');
-      },),
-      // home: LoginPage(),
+      // home: RegistrationPage(key: UniqueKey(), onJumpToLogin: () {
+      //   print('点击返回');
+      // },),
+      home: LoginPage(),
     );
   }
 }

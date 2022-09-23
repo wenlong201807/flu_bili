@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flu_bili/http/core/hi_error.dart';
 import 'package:flu_bili/http/dao/login_dao.dart';
 import 'package:flu_bili/util/string_util.dart';
-// import 'package:flu_bili/util/toast.dart';
+import 'package:flu_bili/util/toast.dart';
 import 'package:flu_bili/widget/appbar.dart';
 import 'package:flu_bili/widget/login_button.dart';
 import 'package:flu_bili/widget/login_effect.dart';
@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         child: ListView(
           children: [
-            LoginEffect(protect: protect),
+            LoginEffect(protect: protect, key: UniqueKey()),
             LoginInput(
               '用户名',
               '请输入用户',
@@ -39,23 +39,23 @@ class _LoginPageState extends State<LoginPage> {
             LoginInput(
               '密码',
               '请输入密码',
-              obscureText: true,
+              obscureText: true, /// 是否为密码输入类型
               onChanged: (text) {
                 password = text;
                 checkInput();
               },
               focusChanged: (focus) {
-                this.setState(() {
+                setState(() {
                   protect = focus;
                 });
               },
             ),
             Padding(
-                padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: LoginButton(
                   '登录',
                   enable: loginEnable,
-                  onPressed: send,
+                  onPressed: send, key: UniqueKey(),
                 ))
           ],
         ),
@@ -80,18 +80,18 @@ class _LoginPageState extends State<LoginPage> {
       var result = await LoginDao.login(userName, password);
       print(result);
       if (result['code'] == 0) {
-        print('登录成功');
-        // showToast('登录成功');
+        // print('登录成功');
+        showToast('登录成功');
       } else {
-        print(result['msg']);
-        // showWarnToast(result['msg']);
+        // print(result['msg']);
+        showWarnToast(result['msg']);
       }
     } on NeedAuth catch (e) {
-      print(e);
-      // showWarnToast(e.message);
+      // print(e);
+      showWarnToast(e.message);
     } on HiNetError catch (e) {
-      print(e);
-      // showWarnToast(e.message);
+      // print(e);
+      showWarnToast(e.message);
     }
   }
 }
